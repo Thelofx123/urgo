@@ -8,11 +8,14 @@ import { useObjCon } from "../context/objContext";
  const Order = () =>{
 
     const {dt, usedt} = useDtCon()
+    console.log(dt)
     const {dt1, usedt1} = useObjCon()
     const [active,useactive] = useState(false)
     const [cl,usecl] = useState([])
     const [date,usedate] = useState("first")
    
+
+
     const onchange = (e) =>{
         usecl({...cl,[e.target.name]:e.target.value,["title"]:dt.title , ["poster"]:dt.poster_path })
         console.log(e.target.data)

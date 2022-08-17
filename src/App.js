@@ -15,6 +15,7 @@ import Price from './comp/price';
 import { TestProvider } from './context/dataContext';
 import {ObjProvider} from './context/objContext'
 import Payment from './comp/payment';
+import { TProvider } from './context/testContext';
 
 function App() {
   const { items } =useMovieContext()
@@ -28,6 +29,7 @@ console.log(arr)
     <div className='main'>
       <TestProvider>
         <ObjProvider>
+          <TProvider>
       <ResponsiveAppBar></ResponsiveAppBar>
      
   
@@ -44,6 +46,7 @@ console.log(arr)
           <Route path="/payment" element={<Payment />} >
           </Route>
         </Routes>
+        </TProvider>
         </ObjProvider>
         </TestProvider>
     </div> 
