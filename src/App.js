@@ -14,8 +14,8 @@ import Order from './comp/order';
 import Price from './comp/price';
 import { TestProvider } from './context/dataContext';
 import {ObjProvider} from './context/objContext'
-import Payment from './comp/payment';
 import { TProvider } from './context/testContext';
+import Payment from './comp/payment';
 
 function App() {
   const { items } =useMovieContext()

@@ -5,16 +5,25 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {MovieProvider} from './context/newContext'
 import {BrowserRouter} from 'react-router-dom'
+import { TestProvider } from './context/dataContext';
+import {ObjProvider} from './context/objContext'
+import { TProvider } from './context/testContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
     <MovieProvider>
-        
-        <App />
+        <TestProvider>
+          <ObjProvider>
+            <TProvider>
 
-</MovieProvider>
+        <App  />
+            </TProvider>
+          </ObjProvider>
+        </TestProvider>
+
+  </MovieProvider>
     
     </BrowserRouter>
     

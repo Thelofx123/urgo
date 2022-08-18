@@ -35,7 +35,7 @@ import { useObjCon } from "../context/objContext";
                 <label>Name</label>
                 <input type="text" name="name" onChange={onchange} placeholder="Name..."></input>
                 <label>Phone</label>
-                <input type="text" name="number" onChange={onchange}></input>
+                <input type="number" name="number" onChange={onchange}></input>
                 <label>email</label>
                 <input type="mail" name="mail" onChange={onchange}></input>
                 <label>Adult</label>
@@ -55,7 +55,6 @@ import { useObjCon } from "../context/objContext";
                 <input type="checkbox" name="tsag" id="vehicle1" value='13:30' onChange={onchange}></input>
                  <label for="vehicle1"> 13:30</label><br></br>
                 </div>
-             
                 <div> 
                     <button onClick={() => {
             usedt1(cl)
