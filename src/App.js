@@ -16,7 +16,7 @@ import { TestProvider } from './context/dataContext';
 import {ObjProvider} from './context/objContext'
 import { TProvider } from './context/testContext';
 import Payment from './comp/payment';
-
+import Transaction from './comp/transaction';
 function App() {
   const { items } =useMovieContext()
   const { data, isLoading } = useMovieContext();
@@ -44,6 +44,8 @@ console.log(arr)
           <Route path="/price" element={<Price />} >
           </Route>
           <Route path="/payment" element={<Payment />} >
+          </Route>
+          <Route path="/transaction" element={<Transaction />} >
           </Route>
         </Routes>
         </TProvider>

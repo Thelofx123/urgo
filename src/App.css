@@ -1,19 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 body{
-    background-color: azure;
+    background-color: rgba(24, 24, 24, 0.859);
+
+    font-size: 1rem;
 }
 .zurag{
     width: 200px;
     height: 300px;
-    border-radius: 3px;
+    border-radius: 10px;
 }
 .card{
-    width: 400px;
-    height: 500px;
-
+    width: 250px;
+    height: 450px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-left: 20px;
+    background-color: rgba(196, 196, 199, 0.09);
+    margin-top: 20px;
+    border-radius: 20px;
+    padding: 20px;
+    color: rgb(255, 255, 255);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
 }
 .title{
     margin-top: 30px;
@@ -26,6 +36,8 @@ body{
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    margin-top: 50px;
+    padding-bottom: 20px;
 }
 .mainButton{
     margin-top: 30px;
@@ -43,29 +55,38 @@ body{
 }
 .navbar{
     width: 100%;
-    height: 100px;
-    background-color: rgb(255, 253, 251);
-  
+    height:50px;
+    background-color: rgba(49, 49, 49, 0.697);
+    backdrop-filter: blur(10px);
+    position: fixed;
+   top: 0;
+   background-attachment:scroll;
+   z-index: 100;
 }
 .yum2{
     list-style-type: none;
     display: flex;
     text-indent: 50px;
     text-decoration: none;
-
+    color: white;
+   
 }
+
 a:-webkit-any-link {
     text-decoration: none;
     color: black;
     cursor: pointer;
+    color: white;
+    text-transform: uppercase;
   }
 .zurag2{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
+
 }
 .half{
     width: 1000px;
-    height:100px;
+    height:50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -79,9 +100,9 @@ a:-webkit-any-link {
     justify-content: space-around;
 }
 .mainZurag{
-    width: 40%;
+    width: 350px;
     height: 500px;
-    border-radius: 10px;
+    border-radius: 20px;
     border: 2px solid black;
 
 }
@@ -109,6 +130,7 @@ a:-webkit-any-link {
     display: flex;
     flex-wrap: wrap;
     width: 500px;
+   
 }
 .top{
     height: 300px;
@@ -118,10 +140,77 @@ a:-webkit-any-link {
     justify-content: center;
     width: 60%;
     margin: auto;
+    padding: 50px;
 }
 .bottom{
    padding-top: 50px;
     height: 60px;
     width: 10%;
     margin: auto;
+    display: flex;
+    width: 500px;
+    margin: auto;
+    justify-content: space-around;
+    padding: 100px;
+}
+.sameButton{
+    width: 100px;
+    height: 50px;
+    background-color: black;
+    border-radius: 5px;
+    color: white;
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.sameButton:hover{
+    background-color: white;
+    color: black;
+}
+.textColor{
+    color: rgba(209, 209, 209, 0.853);
+}
+/* ticket */
+.fullTicket{
+    margin-top: 30px;
+}
+.ticket{
+    
+    width: 800px;
+    height: 500px;
+    position: relative;
+  
+}
+.subNavbar{
+    width: 100%;
+    height: 60px;
+    background-color: rgba(44, 44, 44, 0.54);
+    margin: auto;
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+.ticketBackground{
+    border-radius: 10px;
+    width:95%;
+    height: 95%;
+    filter:  blur(1px) grayscale(.8);
+   
+}
+.imageClass{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin: auto;
+
+}
+.secondTicket{
+    width: 100%;
+    height: 400px;
+    background-color: aliceblue;
+    border-radius:10px;
 }
