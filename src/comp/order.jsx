@@ -1,12 +1,10 @@
-import React, { useState ,useEffect} from "react";
-import { useContext } from "react";
+import React, { useState } from "react";
+
 import "../App.css"
 import { useDtCon } from "../context/dataContext";
 import { Navigate } from 'react-router-dom';
 import { useObjCon } from "../context/objContext";
-import { collection , onSnapshot,addDoc ,getDoc,getDocs,doc, setDoc} from 'firebase/firestore';
-import {db} from "../firebase"
-import {Link, Routes ,Route} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 
  const Order = () =>{
@@ -15,17 +13,20 @@ import {Link, Routes ,Route} from "react-router-dom";
     const {dt1, usedt1} = useObjCon()
     const [active,useactive] = useState(false)
     const [cl,usecl] = useState([])
-    const [date,usedate] = useState("first")
-    const [index1,useindex1] = useState([])
+
+
     let count=0
 
     const onchange = (e) =>{
-        usecl({...cl,[e.target.name]:e.target.value,["title"]:dt.name || dt.title , ["poster"]:dt.poster_path,["id"]:dt.id ,["backdrop"]:dt.backdrop_path  })
+        e.preventDefault();
+   
+        usecl({...cl,[e.target.name]:e.target.value,["title"]:dt.name || dt.title , ["poster"]:dt.poster_path,["id"]:dt.id ,["backdrop"]:dt.backdrop_path })
     }
     if(active){
         return <Navigate   to="/payment" />
     }
-    console.log(cl)
+
+
     return(
       <div className="order">
             
@@ -56,10 +57,18 @@ import {Link, Routes ,Route} from "react-router-dom";
                  <label for="vehicle1"> 13:30</label><br></br>
                 </div>
                 <div> 
+               
                 <button onClick={() => 
                     {
-                        usedt1(cl)
-                        useactive(true)
+                            let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                            if(cl.mail.match(mailformat)){
+                                usedt1(cl)
+                                useactive(true)
+                            }
+                            else{
+                                    alert("Wrong email")
+                            }
+                      
                     }}>Continue</button>
            
             

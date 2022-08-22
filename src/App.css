@@ -214,3 +214,13 @@ a:-webkit-any-link {
     background-color: aliceblue;
     border-radius:10px;
 }
+input[type=checkbox]
+{
+  width: 27px;
+  height: 30px;
+}
+
+input[type=checkbox][disabled] {
+    outline: 3px solid rgb(255, 255, 255);
+    outline-style: dashed;
+  }

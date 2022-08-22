@@ -1,10 +1,7 @@
 import React from "react";
-import { useContext } from "react";
+
 import "../App.css"
- const Coming = ({data}) =>{
-    console.log(data)
-  
-  
+ const Coming = () =>{
     return(
       <div >
            

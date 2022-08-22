@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import { useContext } from "react";
 import "../App.css"
-import {
-   Link,Route
- } from "react-router-dom";
- import { Navigate } from 'react-router-dom';
-import Order from "./order";
+import { Navigate } from 'react-router-dom';
 import { useDtCon } from "../context/dataContext";
 
  const Changer = ({data}) =>{

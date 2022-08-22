@@ -1,13 +1,6 @@
 import React, { useState ,useEffect} from "react";
-import { useContext } from "react";
 import "../App.css"
-import { Navigate } from 'react-router-dom';
-import { useDtCon } from "../context/dataContext";
-import { useObjCon } from "../context/objContext";
 import { useTestCon } from "../context/testContext";
-import { collection , onSnapshot,addDoc ,getDoc,getDocs,doc, setDoc,updateDoc} from 'firebase/firestore';
-import {db} from "../firebase"
-import { async } from "@firebase/util";
 
 
 
@@ -17,7 +10,7 @@ import { async } from "@firebase/util";
     const [index,useindex] = useState([])
     const [isclicked,setisclicked] = useState([])
     const {isId, setIsId} = useTestCon()
-    console.log(isId)
+
     
    
     return(

@@ -22,7 +22,7 @@ function App() {
   const { data, isLoading } = useMovieContext();
   let arr = []
   arr= items.results
-console.log(arr)
+
 
   return (
    
