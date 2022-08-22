@@ -71,7 +71,7 @@ import Transaction from "./transaction";
     const backto = () =>{ 
         return <Navigate   to="/orders" />
     }
-
+    console.log(dt1)
 
     return(
         <div  className="full" >
@@ -102,7 +102,7 @@ import Transaction from "./transaction";
                 <h2>Seat:</h2>
                 <h4 className="textColor">{isseat.map(e =>  ` ${e} `) }</h4>
                 <h2>Total price:</h2>
-                <h4 className="textColor">{ isNaN() ? 0 : parseInt(dt1.Anumber)*a + parseInt(dt1.knumber)*h }</h4>
+                <h4 className="textColor">{ !isNaN() ? 0 : parseInt(dt1.Anumber)*a + parseInt(dt1.knumber)*h }</h4>
             </div>
             
       </div>

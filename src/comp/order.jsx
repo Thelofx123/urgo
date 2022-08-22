@@ -17,15 +17,15 @@ import {Link, Routes ,Route} from "react-router-dom";
     const [cl,usecl] = useState([])
     const [date,usedate] = useState("first")
     const [index1,useindex1] = useState([])
-   
+    let count=0
 
     const onchange = (e) =>{
-        usecl({...cl,[e.target.name]:e.target.value,["title"]:dt.name || dt.title , ["poster"]:dt.poster_path,["id"]:dt.id ,["backdrop"]:dt.backdrop_path })
+        usecl({...cl,[e.target.name]:e.target.value,["title"]:dt.name || dt.title , ["poster"]:dt.poster_path,["id"]:dt.id ,["backdrop"]:dt.backdrop_path  })
     }
     if(active){
         return <Navigate   to="/payment" />
     }
-
+    console.log(cl)
     return(
       <div className="order">
             
@@ -39,9 +39,9 @@ import {Link, Routes ,Route} from "react-router-dom";
                 <label>email</label>
                 <input type="mail" name="mail" onChange={onchange}></input>
                 <label>Adult</label>
-                <input type="text" name="Anumber" onChange={onchange}></input>
+                <input type="number" name="Anumber" defaultValue={0} onChange={onchange}></input>
                 <label>Kid</label>
-                <input type="text" name="knumber" onChange={onchange}></input>
+                <input type="number" name="knumber" defaultValue={0}  onChange={onchange}></input>
                 <label>Pick a time*</label>
                 <div>
                 <input type="checkbox" name="tsag" id="vehicle1" value='11:30' onChange={onchange}></input>
