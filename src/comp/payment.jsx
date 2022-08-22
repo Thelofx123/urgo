@@ -18,16 +18,14 @@ import {Link} from "react-router-dom";
     const [index,useindex] = useState([])
     const [isclicked,setisclicked] = useState([])
     const {isId, setIsId} = useTestCon()
-    const [isseat,useisseat] = useState([])
     const [isseat1,useisseat1] = useState([])
 
     let anumber =  isNaN(dt1.Anumber) ? 0 : parseInt(dt1.Anumber)
     let Knumber = isNaN(dt1.knumber) ? 0 : parseInt(dt1.knumber)
     let total = anumber + Knumber
 
-   
-    let count = parseInt(dt1.Anumber) + parseInt(dt1.knumber)
-
+    console.log(dt1)
+ 
  
     const auto = async () =>{
         const getData=  await getDoc(doc(db,`movies/${dt1.id}`))
@@ -46,11 +44,9 @@ import {Link} from "react-router-dom";
         
             let ids=   parseInt(e.target.getAttribute("id"))
                        if(!isclicked.includes(ids)){
-                        setisclicked( prev => 
-                            [...prev,...index, ids])
-                          
-
-                            useisseat1( prev => [...prev,ids])
+                        setisclicked( prev=>
+                         [...prev,ids])
+                            useisseat1( prev => [...prev,...index,ids])
                         }
                        
                     
@@ -64,13 +60,16 @@ import {Link} from "react-router-dom";
                         }
                 
             }
-          
-    const onclick = () =>{
+           
+       
+    const onclick =  () =>{
+        // setisclicked(prev=> [...prev,...index])
+        // console.log(isclicked) 
         const cityRef = doc(db, `movies/${dt1.id}`);
-        setDoc(cityRef, {id:isclicked},{merge:true} );
-        setIsId({...isId,["title"]:dt1.name || dt1.title , ["poster"]:dt1.poster,["id"]:dt1.id,["name"]:dt1.name,["time"]:dt1.tsag,["seat"]:isseat1,["backdrop"]:dt1.backdrop ,["total"]:total})
+        setDoc(cityRef, {id:isclicked});
+        setIsId({...isId,["title"]:dt1.title  , ["name"]:dt1.name,["mail"]:dt1.mail, ["phone"]:dt1.number ,["poster"]:dt1.poster,["id"]:dt1.id,["name"]:dt1.name,["time"]:dt1.tsag,["seat"]:isseat1,["backdrop"]:dt1.backdrop ,["total"]:anumber * a + Knumber * h})
     }
-  
+    console.log(dt1)
     const backto = () =>{ 
         return <Navigate   to="/orders" />
     }
@@ -91,13 +90,13 @@ import {Link} from "react-router-dom";
             
             <img className="mainZurag" src={`https://image.tmdb.org/t/p/original${dt1.poster}`}></img>
             <div>
-                <h2>Name: </h2>
+                {/* <h2>Name: </h2>
                 <h4 className="textColor">{dt1.name}</h4>
                 <h2>Movie name: </h2>
                 <h4 className="textColor">{dt1.title}</h4>
                 <h2>On :</h2>
                 <h4 className="textColor">{dt1.tsag}</h4>
-                <h2>Ticket </h2>
+            */}<h2>Ticket </h2> 
                 <h4 className="textColor">{anumber + Knumber}</h4>
                 <h2>Seat:</h2>
                 <h4 className="textColor">{isseat1.map(e=> ` ~ ${e} `)}</h4>

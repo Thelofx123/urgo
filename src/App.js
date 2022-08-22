@@ -34,7 +34,7 @@ function App() {
      
   
     <Routes>
-          <Route path="/about" element={    !isLoading ?  arr.map(e => (
+          <Route path="/" element={    !isLoading ?  arr.map(e => (
           <Changer data={e} ></Changer>
         )) : <p>Loading...</p>}/>
           <Route path="/soon" element={<Coming />} >

@@ -16,7 +16,6 @@ import {Link} from "react-router-dom";
 
 
     let count=0
-
     const onchange = (e) =>{
         e.preventDefault();
    
@@ -28,56 +27,64 @@ import {Link} from "react-router-dom";
 
 
     return(
-      <div className="order">
+        <div  className="order">
+
+      
+        {   
+            dt ?  <div  className="order">
             
-                <img className="mainZurag" src={`https://image.tmdb.org/t/p/original${dt.poster_path}`}></img>
-                <div className="half1">
-                <h1>Booking section</h1>
-                <label>Name</label>
-                <input type="text" name="name" onChange={onchange} placeholder="Name..."></input>
-                <label>Phone</label>
-                <input type="number" name="number" onChange={onchange}></input>
-                <label>email</label>
-                <input type="mail" name="mail" onChange={onchange}></input>
-                <label>Adult</label>
-                <input type="number" name="Anumber" defaultValue={0} onChange={onchange}></input>
-                <label>Kid</label>
-                <input type="number" name="knumber" defaultValue={0}  onChange={onchange}></input>
-                <label>Pick a time*</label>
-                <div>
-                <input type="checkbox" name="tsag" id="vehicle1" value='11:30' onChange={onchange}></input>
-                 <label for="vehicle1"> 11:30</label><br></br>
-                </div>
-                <div>
-                <input type="checkbox" name="tsag" id="vehicle1" value='12:30' onChange={onchange}></input>
-                 <label for="vehicle1"> 12:30</label><br></br>
-                </div>
-                <div>
-                <input type="checkbox" name="tsag" id="vehicle1" value='13:30' onChange={onchange}></input>
-                 <label for="vehicle1"> 13:30</label><br></br>
-                </div>
-                <div> 
-               
-                <button onClick={() => 
-                    {
-                            let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-                            if(cl.mail.match(mailformat)){
-                                usedt1(cl)
-                                useactive(true)
-                            }
-                            else{
-                                    alert("Wrong email")
-                            }
-                      
-                    }}>Continue</button>
+            <img className="mainZurag" src={`https://image.tmdb.org/t/p/original${dt.poster_path}`}></img>
+            <div className="half1">
+            <h1>Booking section</h1>
+            <label>Name</label>
+            <input type="text" name="name" onChange={onchange} placeholder="Name..."></input>
+            <label>Phone</label>
+            <input type="number" name="number" onChange={onchange}></input>
+            <label>email</label>
+            <input type="mail" name="mail" onChange={onchange}></input>
+            <label>Adult</label>
+            <input type="number" name="Anumber" defaultValue={0} onChange={onchange}></input>
+            <label>Kid</label>
+            <input type="number" name="knumber" defaultValue={0}  onChange={onchange}></input>
+            <label>Pick a time*</label>
+            <div>
+            <input type="checkbox" name="tsag" id="vehicle1" value='11:30' onChange={onchange}></input>
+             <label for="vehicle1"> 11:30</label><br></br>
+            </div>
+            <div>
+            <input type="checkbox" name="tsag" id="vehicle1" value='12:30' onChange={onchange}></input>
+             <label for="vehicle1"> 12:30</label><br></br>
+            </div>
+            <div>
+            <input type="checkbox" name="tsag" id="vehicle1" value='13:30' onChange={onchange}></input>
+             <label for="vehicle1"> 13:30</label><br></br>
+            </div>
+            <div> 
            
-            
-      <Link to="/about">
-      <button>Back</button>
-      </Link>
+            <button onClick={() => 
+                {
+                        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                        if(cl.mail.match(mailformat)){
+                            usedt1(cl)
+                            useactive(true)
+                        }
+                        else{
+                                alert("Wrong email")
+                        }
                   
-                </div>
-          </div>
+                }}>Continue</button>
+       
+        
+  <Link to="/about">
+  <button>Back</button>
+  </Link>
+              
+            </div>
+      </div>
+  </div>
+  : (<div>No order</div>)
+ 
+        }
       </div>
     )
 }

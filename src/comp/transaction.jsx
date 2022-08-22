@@ -11,13 +11,13 @@ import { useTestCon } from "../context/testContext";
     const [isclicked,setisclicked] = useState([])
     const {isId, setIsId} = useTestCon()
 
-    
+    console.log(isId)
    
     return(
         <div className="fullTicket">
             <div className="ticket">
                 <div className="subNavbar">
-                    <h2>{isId.name || isId.title}</h2>
+                    <h2>{isId.title}</h2>
                 </div>
                 <div className="imageClass">
                 <img className="ticketBackground" src={`https://image.tmdb.org/t/p/original${isId.backdrop}`}></img>
@@ -25,9 +25,12 @@ import { useTestCon } from "../context/testContext";
             </div>
 
             <div className="secondTicket">
-                <h1>Name:{isclicked.name}</h1>
-                <h1>Name:{isclicked}</h1>
-
+                <h1>Name: {isId.name }</h1>
+                <h1>Email: {isId.mail}</h1>
+                <h1>Phone Number: {isId.phone}</h1>
+                <h1>Seat Number: {isId.seat}</h1>
+                <h1>Time: {isId.time}</h1>
+                <h1>Total Price:{isId.total} MNT</h1>
             </div>
         </div>
     )

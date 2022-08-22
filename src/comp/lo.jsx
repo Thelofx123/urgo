@@ -23,11 +23,14 @@ import { useDtCon } from "../context/dataContext";
          <div className="title">{data.name || data.title}</div>
          <div className="title1">{data.release_date}</div>
 
+
          <button className="mainButton" onClick={() => {
            
-            usedt(data)
-            useactive(true)
-         }} >More</button>
+           usedt(data)
+           useactive(true)
+        }} >More</button>
+       
+        
       </div>
     )
 }
