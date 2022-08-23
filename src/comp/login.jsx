@@ -45,7 +45,7 @@ import {
 
     const requestOTP = (e)=>{
         e.preventDefault();
-        if(phoneNumber.length >= 8){
+        if(phoneNumber.length >= 12){
             setExpandform(true)
             generateRecaptcha()
             let appVerifier = window.recaptchaVerifier
@@ -62,6 +62,18 @@ import {
                 });
         }
     }
+    const verifyOTP =(e) =>{
+        let otp = e.target.value;
+        setotp(otp)
+        if(otp.length===6){
+            let confirmationResult = window.confirmationResult;
+            confirmationResult.confirm(otp).then((result) =>{
+                const user = result.user
+            }).catch((error) =>{
+
+            })
+        }
+    }
  
    
   
@@ -76,20 +88,20 @@ import {
 
         <div className="mb-3"> 
         <label htmlFor="phoneNunberInput" className="form-label">Phone number</label> 
-        <input type="tel" className="form-control" id="phoneNumberInput" aria-describedby="enailhelp" value={phoneNumber} onChange={(e) =>setPhoneNumber(e.target.value)}/>
-        <div id="phoneNumberHelp" className="form-text">Please enter your phone number</div> 
-</div> 
-{expandForm === true ? 
-<>
-<div className="mb-3"> 
-<label htmlFor="otpInput" className="form-label" >0TP</label> 
- <input type="number" className="form-control" id="otpInput" />
-<div id="otpHelp" className="form-text">Please enter the one time pin sent to your phones</div>
-</div>
-</>
-: null
-}
-            {
+        <input type="tel" className="form-control" id="phoneNumberInput" aria-describedby="emailhelp" value={phoneNumber} onChange={(e) =>setPhoneNumber(e.target.value)}/>
+   
+</div><br></br> 
+                {expandForm === true ? 
+                <>
+                <div className="mb-3"> 
+                <label htmlFor="otpInput" className="form-label" >OTP</label> 
+                <input type="number" className="form-control" id="otpInput" value={otp} onChange={verifyOTP} />
+                
+                </div>
+                </>
+                : null
+                }
+                            {
                 expandForm === false ? 
                 <button type="submit" className="btn" >Request OTP</button>
                 :null
