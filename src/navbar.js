@@ -22,6 +22,7 @@ const ResponsiveAppBar = () => {
           <li><Link to="/soon">Coming soon</Link></li>
           <li><Link to="/orders">Order</Link></li>
           <li><Link to="/price">Price</Link></li>
+          <li><Link to="/login">Login</Link></li>
         </div>
     </div>
  

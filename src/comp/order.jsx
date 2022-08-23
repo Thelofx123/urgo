@@ -18,7 +18,6 @@ import {Link} from "react-router-dom";
     let count=0
     const onchange = (e) =>{
         e.preventDefault();
-   
         usecl({...cl,[e.target.name]:e.target.value,["title"]:dt.name || dt.title , ["poster"]:dt.poster_path,["id"]:dt.id ,["backdrop"]:dt.backdrop_path })
     }
     if(active){
@@ -28,8 +27,6 @@ import {Link} from "react-router-dom";
 
     return(
         <div  className="order">
-
-      
         {   
             dt ?  <div  className="order">
             
@@ -39,13 +36,13 @@ import {Link} from "react-router-dom";
             <label>Name</label>
             <input type="text" name="name" onChange={onchange} placeholder="Name..."></input>
             <label>Phone</label>
-            <input type="number" name="number" onChange={onchange}></input>
+            <input type="text" name="number"  pattern="\d*" maxlength="8" onChange={onchange}></input>
             <label>email</label>
             <input type="mail" name="mail" onChange={onchange}></input>
             <label>Adult</label>
-            <input type="number" name="Anumber" defaultValue={0} onChange={onchange}></input>
+            <input type="number" name="Anumber" max="15"  onChange={onchange}></input>
             <label>Kid</label>
-            <input type="number" name="knumber" defaultValue={0}  onChange={onchange}></input>
+            <input type="number" name="knumber"  max="15" onChange={onchange}></input>
             <label>Pick a time*</label>
             <div>
             <input type="checkbox" name="tsag" id="vehicle1" value='11:30' onChange={onchange}></input>
