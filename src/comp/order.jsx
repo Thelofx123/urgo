@@ -40,9 +40,9 @@ import {Link} from "react-router-dom";
             <label>email</label>
             <input type="mail" name="mail" onChange={onchange}></input>
             <label>Adult</label>
-            <input type="number" name="Anumber" max="15"  onChange={onchange}></input>
+            <input type="number" name="Anumber" max="30" min="0" onChange={onchange}></input>
             <label>Kid</label>
-            <input type="number" name="knumber"  max="15" onChange={onchange}></input>
+            <input type="number" name="knumber"  max="30" min="0" onChange={onchange}></input>
             <label>Pick a time*</label>
             <div>
             <input type="checkbox" name="tsag" id="vehicle1" value='11:30' onChange={onchange}></input>

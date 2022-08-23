@@ -45,8 +45,8 @@ import {Link} from "react-router-dom";
             let ids=   parseInt(e.target.getAttribute("id"))
                        if(!isclicked.includes(ids)){
                         setisclicked( prev=>
-                         [...prev,ids])
-                            useisseat1( prev => [...prev,...index,ids])
+                         [...prev,...index,ids])
+                            useisseat1( prev => [...prev,ids])
                         }
                        
                     

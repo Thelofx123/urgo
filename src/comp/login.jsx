@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../App.css"
-import auth from "../firebase"
-import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,onAuthStateChanged,signInWithPhoneNumber} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,onAuthStateChanged,signInWithPhoneNumber,RecaptchaVerifier} from "firebase/auth";
 import {
     getFirestore,
     collection,
@@ -16,116 +15,92 @@ import {
     onSnapshot,
     CollectionReference
   } from 'firebase/firestore'
-  import {db} from "../firebase"
- const Login = () =>{
-    const [active,useactive] = useState(true)
-    const [info,setInfo] = useState({})
-    const onchange = (e) =>{
-        e.preventDefault();
-        setInfo({...info,[e.target.name]:e.target.value})
-    }   
-   let uid
-      
-      
-   const submit = () =>{
-       console.log(info)
-       if(active){
-           
-        const auth = getAuth();
-        const phone = info.phone
-        const password = info.password
-       
-        // const phoneNumber = getPhoneNumberFromUserInput();
-        const appVerifier = window.recaptchaVerifier;
+  const Login = () => {
+    // Inputs
+    const [mynumber, setnumber] = useState("");
+    const [otp, setotp] = useState('');
+    const [show, setshow] = useState(false);
+    const [final, setfinal] = useState('');
+    const auth = getAuth();
+    const appVerifier = window.recaptchaVerifier;
+ 
+    const countryCode = "+976";
+    const [phoneNumber,setPhoneNumber] = useState(countryCode)
+    const [expandForm,setExpandform] = useState(false)
 
-        signInWithPhoneNumber(auth, phone, appVerifier)
-            .then((confirmationResult) => {
-           
-            window.confirmationResult = confirmationResult;
-         
-            }).catch((error) => {
-           
-            });
-       }
-       else{
-        const auth = getAuth();
-        const email = info.email
-        const password = info.password
-        const name = info.name
-        const number = info.number
-        createUserWithEmailAndPassword(auth, email, password,name,number)
-             .then((userCredential) => {
-             const user = userCredential.user;
-             const userUid = userCredential.user.uid;
-             console.log("done");
-             
-             setDoc(doc(db, "users",userUid), {
-                email,
-                name,
-                number,
-             },{merge: "true"});
-             useactive(true)
-             })
-             .catch((error) => {
-             const errorCode = error.code;
-             const errorMessage = error.message;
-              console.log("nope")
-             });
-       }
-      
-            
-    }
 
-   
-    //   if(active){
-          
-    //         return <Navigate   to="/orders" />
-    //   }
-    const switch1 = () =>{
-        useactive(!active)
-        setInfo('')
-      
-    }
-   
-    return(
-        <div>
-            { 
-            active ?
-                    <div className="login">
-                                
-                    <div className="input" onChange={onchange}>
-                        <label>Phone number  </label>
-                        <input name="phone" type="number" />
-                        <label>  Password  </label>
-                        <input name="password" type="password"  onChange={onchange}/>
-                        <div>
-                        <button onClick={submit} >Submit</button>
-                        </div>
-                    </div>
-                    
-                    </div>  
-            :
-            <div className="Signup">
-                                
-            <div className="input" onChange={onchange}>
-                <label>Name</label>
-                <input name="name" type="text" onChange={onchange}/>
-                <label>Phone Number</label>
-                <input name="number" type="number" onChange={onchange}/>
-                <label>Email</label>
-                <input name="email" type="email" onChange={onchange}/>
-                <label>Password</label>
-                <input name="password" type="password"  onChange={onchange}/>
-                <div>
-                <button onClick={submit} >Submit</button>
-                </div>
-            </div>
-            
-            </div>  
+    const generateRecaptcha = () =>{
+        window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
+            'size': 'invisible',
+            'callback': (response) => {
+              // reCAPTCHA solved, allow signInWithPhoneNumber.
+              // ...
+            },
+            'expired-callback': () => {
+              // Response expired. Ask user to solve reCAPTCHA again.
+              // ...
             }
-        <button onClick={switch1}>{active? "sign up" : "Back to log in"}</button>
-        </div>   
-    )
-         
+          }, auth);
+    }
+
+    const requestOTP = (e)=>{
+        e.preventDefault();
+        if(phoneNumber.length >= 8){
+            setExpandform(true)
+            generateRecaptcha()
+            let appVerifier = window.recaptchaVerifier
+            signInWithPhoneNumber(auth,phoneNumber,appVerifier)
+            .then((confirmationResult) => {
+              alert("code sent")
+              setshow(true);
+              window.confirmationResult = confirmationResult;
+            })
+          
+                .catch((err) => {
+                    alert(err);
+                    window.location.reload()
+                });
+        }
+    }
+ 
+   
+  
+  
+    return (
+        
+<div className='formContainer'>
+
+<form onSubmit={requestOTP}> 
+
+<h1>Sign in with phone number</h1> 
+
+        <div className="mb-3"> 
+        <label htmlFor="phoneNunberInput" className="form-label">Phone number</label> 
+        <input type="tel" className="form-control" id="phoneNumberInput" aria-describedby="enailhelp" value={phoneNumber} onChange={(e) =>setPhoneNumber(e.target.value)}/>
+        <div id="phoneNumberHelp" className="form-text">Please enter your phone number</div> 
+</div> 
+{expandForm === true ? 
+<>
+<div className="mb-3"> 
+<label htmlFor="otpInput" className="form-label" >0TP</label> 
+ <input type="number" className="form-control" id="otpInput" />
+<div id="otpHelp" className="form-text">Please enter the one time pin sent to your phones</div>
+</div>
+</>
+: null
 }
-export default Login 
+            {
+                expandForm === false ? 
+                <button type="submit" className="btn" >Request OTP</button>
+                :null
+            }
+          
+                <div id={"recaptcha-container"}></div>
+    </form>
+    </div>
+
+    );
+}
+  
+export default Login;
+//
