@@ -5,7 +5,7 @@ import { useDtCon } from "../context/dataContext";
 import { Navigate } from 'react-router-dom';
 import { useObjCon } from "../context/objContext";
 import {Link} from "react-router-dom";
-
+import {UseauthState1} from "../context/authstate"
 
  const Order = () =>{
 
@@ -13,7 +13,7 @@ import {Link} from "react-router-dom";
     const {dt1, usedt1} = useObjCon()
     const [active,useactive] = useState(false)
     const [cl,usecl] = useState([])
-
+    const {user, setUser} = UseauthState1()
 
     let count=0
     const onchange = (e) =>{
@@ -27,45 +27,39 @@ import {Link} from "react-router-dom";
     return(
         <div  className="order">
         {   
-            dt ?  <div  className="order">
-            
+            user ?  
+            dt ? (<div  className="order">
             <img className="mainZurag" src={`https://image.tmdb.org/t/p/original${dt.poster_path}`}></img>
             <div className="half1">
             <h1>Booking section</h1>
-            <label>Name</label>
-            <input type="text" name="name" onChange={onchange} placeholder="Name..."></input>
-            <label>Phone</label>
-            <input type="text" name="number"  pattern="\d*" maxlength="8" onChange={onchange}></input>
-            <label>email</label>
-            <input type="mail" name="mail" onChange={onchange}></input>
             <label>Adult</label>
             <input type="number" name="Anumber" max="30" min="0" onChange={onchange}></input>
             <label>Kid</label>
             <input type="number" name="knumber"  max="30" min="0" onChange={onchange}></input>
             <label>Pick a time*</label>
             <div>
-            <input type="checkbox" name="tsag" id="vehicle1" value='11:30' onChange={onchange}></input>
+            <input type="radio" name="tsag"  value='11:30' onChange={onchange}></input>
              <label for="vehicle1"> 11:30</label><br></br>
             </div>
             <div>
-            <input type="checkbox" name="tsag" id="vehicle1" value='12:30' onChange={onchange}></input>
+            <input type="radio" name="tsag"  value='12:30' onChange={onchange}></input>
              <label for="vehicle1"> 12:30</label><br></br>
             </div>
             <div>
-            <input type="checkbox" name="tsag" id="vehicle1" value='13:30' onChange={onchange}></input>
+            <input type="radio" name="tsag"  value='13:30' onChange={onchange}></input>
              <label for="vehicle1"> 13:30</label><br></br>
             </div>
             <div> 
            
             <button onClick={() => 
                 {
-                        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-                        if(cl.mail.match(mailformat)){
+                        
+                        if(cl.Anumber || cl.knumber ){
                             usedt1(cl)
                             useactive(true)
                         }
                         else{
-                                alert("Wrong email")
+                                alert("Hello channel welcome to my guys")
                         }
                   
                 }}>Continue</button>
@@ -77,9 +71,12 @@ import {Link} from "react-router-dom";
               
             </div>
       </div>
-  </div>
-  : (<div>No order</div>)
- 
+  </div>)
+  : (<div>No order for now</div>)
+  : (<div>Please Login
+    <Link to="/login"> <button>Login</button></Link>
+  
+  </div>)
         }
       </div>
     )

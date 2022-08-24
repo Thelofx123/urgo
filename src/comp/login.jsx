@@ -15,7 +15,7 @@ import {
     onSnapshot,
     CollectionReference
   } from 'firebase/firestore'
-  import { Navigate ,Link} from 'react-router-dom';
+  import { useNavigate } from "react-router-dom";
   import {UseauthState1} from "../context/authstate"
   const Login = () => {
 
@@ -28,18 +28,18 @@ import {
     const [phoneNumber,setPhoneNumber] = useState(countryCode)
     const [expandForm,setExpandform] = useState(false)
     const {user, setUser} = UseauthState1();
+    
 
     const generateRecaptcha = () =>{
         window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
             'size': 'invisible',
             'callback': (response) => {
-        
             },
             'expired-callback': () => {
             }
           }, auth);
     }
-
+    let navigate = useNavigate();
     const requestOTP = (e)=>{
         e.preventDefault();
         if(phoneNumber.length >= 8){
@@ -48,7 +48,7 @@ import {
             let appVerifier = window.recaptchaVerifier
             signInWithPhoneNumber(auth,phoneNumber,appVerifier)
             .then((confirmationResult) => {
-                console.log(phoneNumber)
+
               alert("code sent")
               setUser(true);
               window.confirmationResult = confirmationResult;
@@ -59,7 +59,7 @@ import {
                 });
         }
     }
-    console.log(user)
+    
     let userUid = "";
     const verifyOTP =(e) =>{
         let otp = e.target.value;
@@ -70,7 +70,9 @@ import {
                 const user = result.user
                 userUid = user.uid
                 setUser(true)
-              
+                localStorage.setItem('phone', JSON.stringify(user.phoneNumber.slice(4)));
+                
+                navigate("../", { replace: true });
             }).catch((error) =>{
 
             })

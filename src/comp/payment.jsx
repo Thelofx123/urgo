@@ -19,20 +19,28 @@ import {Link} from "react-router-dom";
     const [isclicked,setisclicked] = useState([])
     const {isId, setIsId} = useTestCon()
     const [isseat1,useisseat1] = useState([])
-
+    const [movie,setMovie] = useState({})
+    let phone = window.localStorage.getItem('phone')
     let anumber =  isNaN(dt1.Anumber) ? 0 : parseInt(dt1.Anumber)
     let Knumber = isNaN(dt1.knumber) ? 0 : parseInt(dt1.knumber)
     let total = anumber + Knumber
 
-    console.log(dt1)
+    console.log(phone)
  
  
     const auto = async () =>{
-        const getData=  await getDoc(doc(db,`movies/${dt1.id}`))
+        const getData=  await getDoc(doc(db,`seats/${dt1.id}`))
        .then ((item) =>{
-     
+       
             useindex( item.data().id)   
-          
+      }) 
+      .catch((err) =>
+      console.log(err)
+      )
+      const getData1=  await getDoc(doc(db,`users/${phone}`))
+       .then ((item) =>{
+       
+            setMovie( item.data().movie)   
       }) 
   }
 
@@ -58,18 +66,19 @@ import {Link} from "react-router-dom";
                                 isseat1.filter(item1 => item1 !== ids)
                                 )
                         }
-                
+                          
+                        setMovie({...movie,title:dt1.title,time:dt1.tsag,seat:isseat1}) 
             }
-           
-       
-    const onclick =  () =>{
-        // setisclicked(prev=> [...prev,...index])
-        // console.log(isclicked) 
-        const cityRef = doc(db, `movies/${dt1.id}`);
-        setDoc(cityRef, {id:isclicked});
-        setIsId({...isId,["title"]:dt1.title  , ["name"]:dt1.name,["mail"]:dt1.mail, ["phone"]:dt1.number ,["poster"]:dt1.poster,["id"]:dt1.id,["name"]:dt1.name,["time"]:dt1.tsag,["seat"]:isseat1,["backdrop"]:dt1.backdrop ,["total"]:anumber * a + Knumber * h})
+        
+    const onclick = async () =>{
+        let moviename = dt1.title
+        const cityRef = doc(db, `users/${phone}`);
+        const seatRef = doc(db, `seats/${dt1.id}`);
+        setIsId({...isId,["title"]:dt1.title , ["phone"]:dt1.number ,["poster"]:dt1.poster,["id"]:dt1.id,["name"]:dt1.name,["time"]:dt1.tsag,["seat"]:isseat1,["backdrop"]:dt1.backdrop ,["total"]:anumber * a + Knumber * h})
+     setDoc(cityRef,  { movie});
+    setDoc(seatRef,{id:isclicked},{merge:true});
+ 
     }
-    console.log(dt1)
     const backto = () =>{ 
         return <Navigate   to="/orders" />
     }
@@ -78,7 +87,6 @@ import {Link} from "react-router-dom";
             <div className="top">
                 <div className="row" > 
                 {seat.map((e,l) =>{
-                
                 return(<input className="seat"  onChange={onchange}   id={l} type="checkbox" disabled={ 
                     (index.includes(l) || (isseat1.length==total && !isseat1.includes(l))) ? true : false
                 }></input>)
@@ -106,7 +114,6 @@ import {Link} from "react-router-dom";
             
       </div>
       <div className="bottom"> 
- 
       <Link to="/transaction">
       <button onClick={onclick} className="sameButton">Continue</button>
       </Link>

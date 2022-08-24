@@ -232,3 +232,10 @@ input[type=checkbox][disabled] {
     outline: 3px solid rgb(255, 255, 255);
     outline-style: dashed;
   }
+  .logoutBtn{
+    background-color: transparent;
+    width: 30px;
+    text-transform: uppercase;
+    color: white;
+    border: none;
+  }
