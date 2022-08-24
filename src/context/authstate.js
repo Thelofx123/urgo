@@ -1,35 +1,18 @@
 import React, { useContext, useState, useEffect, createContext } from "react";
 
 
-const authState = createContext()
+const authState1 = createContext()
 
-export const authProvider = ({children}) => {
-
-    let uid;
-    const [user, setUser] =useState("")
-
-    
-
-    const currentUser = auth.currentUser;
-      const autoSignin = () =>{
-      onAuthStateChanged(auth, (user) => {
-          if (user) {
-               uid = user.uid;       
-              console.log("My nigga cumback")
-        
-            } else {
-              console.log("I will be back")
-            }
-      })
-    }
+export const AuthProvider = ({children}) => {
 
 
+    const [user, setUser] =useState(false)
 
     return (
-        <authState.Provider value={{dt, usedt}}>
+        <authState1.Provider value={{user, setUser}}>
          {children}   
-        </authState.Provider>
+        </authState1.Provider>
     )
 }
 
-export const useauthState = () => useContext(authState)
+export const UseauthState1 = () => useContext(authState1)

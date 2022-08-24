@@ -23,8 +23,7 @@ import {Link} from "react-router-dom";
     if(active){
         return <Navigate   to="/payment" />
     }
-
-
+    
     return(
         <div  className="order">
         {   

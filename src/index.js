@@ -8,27 +8,24 @@ import {BrowserRouter} from 'react-router-dom'
 import { TestProvider } from './context/dataContext';
 import {ObjProvider} from './context/objContext'
 import { TProvider } from './context/testContext';
+import {AuthProvider} from './context/authstate'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-    <TestProvider>
+    <AuthProvider>
+      <BrowserRouter>
+        <TestProvider>
           <ObjProvider>
-    <MovieProvider>
-      
-            <TProvider>
-
-           <App/>
-            </TProvider>
-         
-
-  </MovieProvider>
-  </ObjProvider>
+            <MovieProvider>
+              <TProvider>
+                <App/>
+              </TProvider>
+            </MovieProvider>
+          </ObjProvider>
         </TestProvider>
-    </BrowserRouter>
-    
-    
+      </BrowserRouter>
+    </AuthProvider>
   </React.StrictMode>
 );
 

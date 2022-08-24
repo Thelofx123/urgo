@@ -8,10 +8,26 @@ import {
 import Coming from './comp/coming';
 import Order from './comp/order';
 import Price from './comp/price';
-
+import {UseauthState1} from "./context/authstate"
+import { getAuth,onAuthStateChanged,signOut} from "firebase/auth";
 
 const ResponsiveAppBar = () => {
   
+  const {user, setUser} = UseauthState1()
+  const auth = getAuth();
+  const [check,setCheck] = React.useState(false)
+
+ 
+      onclick = () =>{
+        const auth = getAuth();
+        signOut(auth).then(() => {
+          console.log("signed out")
+          setUser(false);
+        }).catch((error) => {
+
+        });
+      }
+      
   return (
   
     <div className='navbar'> 
@@ -22,7 +38,10 @@ const ResponsiveAppBar = () => {
           <li><Link to="/soon">Coming soon</Link></li>
           <li><Link to="/orders">Order</Link></li>
           <li><Link to="/price">Price</Link></li>
-          <li><Link to="/login">Login</Link></li>
+         
+          <li>{user ? <button onClick={onclick}>Logout</button> :  <li><Link to="/login">Login</Link></li>}
+          </li>
+         
         </div>
     </div>
  
