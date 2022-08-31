@@ -1,7 +1,7 @@
 import {initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore } from "firebase/firestore";
-
+import { getFirestore,setDoc ,doc,getDoc} from "firebase/firestore";
+import { DtCon1 } from './context/setcontext';
 
 const firebaseConfig = {
     apiKey: "AIzaSyC7ap0lpHwHpbFaOoyGyBpEBhxUSICEIR8",
@@ -14,3 +14,24 @@ const firebaseConfig = {
   };
   const app = initializeApp(firebaseConfig)
   export const db = getFirestore(app);
+
+  export const textList = (userName,user2,data,data2) =>{
+    const cityRef = doc(db, `users/${userName}`);
+    const seatRef = doc(db, `seats/${user2}`);
+    setDoc(cityRef,  {data});
+    setDoc(seatRef,{id:data2},{merge:true});
+  }
+
+  export const dataFetch =   async (path,path2)=>{
+     const {dt,useDt,dt2,useDt2} = DtCon1()
+    const getData=  await getDoc(doc(db,`seats/${path}`))
+    .then ((item) =>{
+        useDt( item.data().id)   
+      
+  }) 
+  const getData1=  await getDoc(doc(db,`users/${path2}`))
+  .then ((item) =>{
+    useDt2( item.data().movie)   
+
+}) 
+}
