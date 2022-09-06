@@ -1,6 +1,7 @@
 import {initializeApp } from 'firebase/app';
+import React, { useState ,useEffect} from "react";
 import { getAuth } from 'firebase/auth';
-import { getFirestore,setDoc ,doc,getDoc} from "firebase/firestore";
+import { getFirestore,setDoc ,doc,getDoc,getDocs,collection} from "firebase/firestore";
 import { DtCon1 } from './context/setcontext';
 
 const firebaseConfig = {
@@ -22,16 +23,21 @@ const firebaseConfig = {
     setDoc(seatRef,{id:data2},{merge:true});
   }
 
-  export const dataFetch =   async (path,path2)=>{
-     const {dt,useDt,dt2,useDt2} = DtCon1()
-    const getData=  await getDoc(doc(db,`seats/${path}`))
-    .then ((item) =>{
-        useDt( item.data().id)   
-      
-  }) 
-  const getData1=  await getDoc(doc(db,`users/${path2}`))
-  .then ((item) =>{
-    useDt2( item.data().movie)   
-
-}) 
+  export const useGetDocsFromFireBase=(collectionName)=>{
+    const [colName,setColName]=useState(collectionName);
+    let [data,setDatas]=useState([]);
+     const getData=async()=>{
+         setDatas(data=[])
+     try {
+         const datas=await getDoc(doc(db,colName));
+         console.log(datas.data().id)
+         setDatas(datas.data().id)
+     } catch (error) {}
+     }
+     useEffect(()=>{
+       getData()
+     },[])
+     return [data]
 }
+
+

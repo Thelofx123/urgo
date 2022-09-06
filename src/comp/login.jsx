@@ -21,8 +21,6 @@ import {
 
 
     const [otp, setotp] = useState('');
-    const [show, setshow] = useState(false);
-    const [final, setfinal] = useState('');
     const auth = getAuth();
     const countryCode = "+976";
     const [phoneNumber,setPhoneNumber] = useState(countryCode)

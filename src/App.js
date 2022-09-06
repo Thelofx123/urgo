@@ -20,7 +20,7 @@ import Transaction from './comp/transaction';
 import Login from './comp/login';
 import {UseauthState1} from "./context/authstate"
 import { getAuth,onAuthStateChanged,} from "firebase/auth";
-
+import Counter from './comp/watch';
 
 function App() {
   const { items } =useMovieContext()
@@ -60,6 +60,8 @@ function App() {
           </Route>
           
           <Route path="/login" element={<Login />}>
+          </Route>
+          <Route path="/watch" element={<Counter />}>
           </Route>
         </Routes>
         </TProvider>
